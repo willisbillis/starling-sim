@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1b1233">
+<title>Murmuration — a starling flock simulator</title>
+<meta name="description" content="Interactive simulation of starling murmurations using topological flocking rules.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="sky" aria-label="Simulated starling murmuration"></canvas>
+
+<header class="hero" id="hero">
+  <h1>Murmuration</h1>
+  <p>Thousands of starlings, each following three simple rules. Move through the sky to scare the flock like a falcon — or tune the rules and watch the pattern change.</p>
+  <button id="enter" class="btn primary">Enter the sky</button>
+</header>
+
+<button id="toggle" class="fab" aria-expanded="true" aria-controls="panel" aria-label="Toggle controls">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+</button>
+
+<aside id="panel" class="panel">
+  <div class="panel-handle" aria-hidden="true"></div>
+  <h2>Flock controls</h2>
+  <div class="presets" role="group" aria-label="Presets">
+    <button class="chip active" data-preset="murmuration">Murmuration</button>
+    <button class="chip" data-preset="tight">Tight ball</button>
+    <button class="chip" data-preset="loose">Loose drift</button>
+    <button class="chip" data-preset="chaos">Chaos</button>
+  </div>
+  <div class="sliders" id="sliders"></div>
+  <div class="row">
+    <label class="switch"><input type="checkbox" id="trails" checked><span>Trails</span></label>
+    <label class="switch"><input type="checkbox" id="roost" checked><span>Roost pull</span></label>
+  </div>
+  <div class="row">
+    <button class="btn" id="falcon">Release falcon</button>
+    <button class="btn" id="reset">Reset</button>
+  </div>
+  <details class="about">
+    <summary>How it works</summary>
+    <p><b>Cohesion</b> steers each bird toward the centre of its neighbours. <b>Alignment</b> matches their heading. <b>Separation</b> avoids collisions.</p>
+    <p>Real starlings track about <b>7 nearest neighbours</b> regardless of distance (Ballerini et al., 2008) — a <i>topological</i> rule that keeps the flock cohesive at any density. Try changing "Neighbours". A soft <b>roost pull</b> keeps the flock drifting through the view, and your pointer (or finger) acts as a predator.</p>
+  </details>
+  <div class="stat"><span id="fps">–</span> fps · <span id="count">–</span> birds</div>
+</aside>
+<script src="app.js"></script>
+</body>
+</html>
